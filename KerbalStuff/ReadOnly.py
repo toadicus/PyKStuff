@@ -8,7 +8,7 @@ from .User import User
 from StaticClass import staticclass
 
 Constants.RootUri = "https://kerbalstuff.com"
-Constants.ApiUri = self.RootUri + "/api"
+Constants.ApiUri = Constants.RootUri + "/api"
 Constants.UserAgent = "PyKStuff by toadicus"
 
 Constants.browse_new = Constants.format_action("/browse/new?page={0:d}")

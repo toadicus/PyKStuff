@@ -88,7 +88,7 @@ class KerbalStuff(KerbalStuffReadOnly):
         with open(file_path, 'rb') as zip_file:
             if not zipfile.is_zipfile(zip_file):
                 raise IOError("File at path '{0}' is not a valid zip file.".format(file_path))
-            files['zipball'] = (file_name, zip_file.readall(), 'application/zip')
+            files['zipball'] = (file_name, zip_file.read(), 'application/zip')
 
         cls.do_post_request(Constants.mod_create, data=data, files=files, cookies=cls.current_cookies)
 
@@ -99,6 +99,7 @@ class KerbalStuff(KerbalStuffReadOnly):
 
     @classmethod
     def mod_update(cls, mod_id: int, mod_version: ModVersion, notify_followers: bool, file_name: str, file_path: str):
+        mod_id = int(mod_id)
         if mod_version is None or not isinstance(mod_version, ModVersion):
             raise TypeError("mod_version must be a valid ModVersion object")
         if mod_version.friendly_version is None or len(mod_version.friendly_version) == 0:
@@ -126,9 +127,9 @@ class KerbalStuff(KerbalStuffReadOnly):
         with open(file_path, 'rb') as zip_file:
             if not zipfile.is_zipfile(zip_file):
                 raise IOError("File at path '{0}' is not a valid zip file.".format(file_path))
-            files['zipball'] = (file_name, zip_file.readall(), 'application/zip')
+            files['zipball'] = (file_name, zip_file.read(), 'application/zip')
 
-        cls.do_post_request(Constants.mod_update, mod_id, data=data, files=file, cookies=cls.current_cookies)
+        cls.do_post_request(Constants.mod_update, mod_id, data=data, files=files, cookies=cls.current_cookies)
 
         if cls.current_json is not None:
             return cls.current_json

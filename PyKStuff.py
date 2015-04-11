@@ -276,6 +276,7 @@ def mod_update(args):
 
     try:
         KerbalStuff.mod_update(args.mod_id, ver, args.notify, file_name, file_path)
+        print(KerbalStuff.current_json)
     except TypeError as x:
         sys.stderr.write(x)
         sys.exit(1)
