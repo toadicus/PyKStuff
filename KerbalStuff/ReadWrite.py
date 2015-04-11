@@ -15,6 +15,7 @@ Constants.mod_update = Constants.format_action("/mod/{0:d}/update")
 
 
 class KerbalStuff(KerbalStuffReadOnly):
+    constants = Constants
     current_cookies = None
     """:type : RequestsCookieJar"""
     @classmethod

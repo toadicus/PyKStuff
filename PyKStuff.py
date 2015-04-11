@@ -212,6 +212,15 @@ def mod_create(args):
 
     try:
         KerbalStuff.mod_create(mod, file_name, file_path)
+        if KerbalStuff.current_json["error"]:
+            sys.stderr.write("Error creating mod '{0}': {1}".format(args.name, KerbalStuff.current_json["reason"]))
+            sys.exit(1)
+        else:
+            sys.stdout.write("Mod created!  New mod id is {0}.  You can view the new mod at {1}{2}".format(
+                KerbalStuff.current_json["id"],
+                KerbalStuff.constants.RootUri,
+                KerbalStuff.current_json["url"]
+            ))
     except TypeError as x:
         sys.stderr.write(x)
         sys.exit(1)
@@ -276,7 +285,15 @@ def mod_update(args):
 
     try:
         KerbalStuff.mod_update(args.mod_id, ver, args.notify, file_name, file_path)
-        print(KerbalStuff.current_json)
+        if KerbalStuff.current_json["error"]:
+            sys.stderr.write("Error updating mod #{0}: {1}".format(args.mod_id, KerbalStuff.current_json["reason"]))
+            sys.exit(1)
+        else:
+            sys.stdout.write("Mod updated!  New version id is {0}.  You can view the new mod version at {1}{2}".format(
+                KerbalStuff.current_json["id"],
+                KerbalStuff.constants.RootUri,
+                KerbalStuff.current_json["url"]
+            ))
     except TypeError as x:
         sys.stderr.write(x)
         sys.exit(1)
